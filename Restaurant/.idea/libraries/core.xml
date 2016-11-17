@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="core">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" />
+    </SOURCES>
+    <jarDirectory url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/repositories/src/main/java/ru/core.jar!/" recursive="false" type="SOURCES" />
+  </library>
+</component>
