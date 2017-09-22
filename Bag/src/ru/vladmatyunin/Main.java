@@ -8,7 +8,7 @@ import java.util.Scanner;
  * We have an array of different Items with weight (supposed they are integers)
  * We also have two different containers, let it be bags
  * The task is to find the best combinations of Items in bags, so that the
- * weight difference between bags is the most minimal
+ * weight difference between max and min bags is the most minimal
  *
  * NOTE: no recursion to use
  */

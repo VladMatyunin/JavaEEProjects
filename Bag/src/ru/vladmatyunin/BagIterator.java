@@ -19,8 +19,8 @@ class BagIterator {
      * 3) iterate the values (the array of weight)
      * 3.1) get each value from 3), iterate between list of bag containers
      * @see BagContainer
-     * 3.2) create new list of bag container, create two bag containers, put
-     *      the value from 3.1 and put to both of created bag containers (first to left bag, second to right)
+     * 3.2) create new list of bag container, create three bag containers, put
+     *      the value from 3.1 and put to all of created bag containers (first to left bag, second to right etc)
      * 3.3) put modified bag containers from 3.2 to created list of bag containers
      *      update list of BC (bag container) from 2)
      *
@@ -41,14 +41,20 @@ class BagIterator {
             List<BagContainer> newResults = new LinkedList<>();
             for (BagContainer container1: results){
                 //two different instances of BC
-                BagContainer newBag1 = new BagContainer(container1.getLeftBag(), container1.getRightBag());
-                BagContainer newBag2 = new BagContainer(container1.getLeftBag(), container1.getRightBag());
+                BagContainer newBag1 = new BagContainer(container1.getLeftBag(),
+                        container1.getMiddleBag(), container1.getRightBag());
+                BagContainer newBag2 = new BagContainer(container1.getLeftBag(),
+                        container1.getMiddleBag(), container1.getRightBag());
+                BagContainer newBag3 = new BagContainer(container1.getLeftBag(),
+                        container1.getMiddleBag(), container1.getRightBag());
 
                 newBag1.putLeft(values[i]);
                 newBag2.putRight(values[i]);
+                newBag3.putMiddle(values[i]);
 
                 newResults.add(newBag1);
                 newResults.add(newBag2);
+                newResults.add(newBag3);
 
                 results = newResults;
             }

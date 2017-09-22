@@ -11,21 +11,29 @@ public class BagContainer {
 
     private List<Integer> leftBag;
 
+    private List<Integer> middleBag;
+
     private List<Integer> rightBag;
 
     public BagContainer(){
         leftBag = new ArrayList<>();
         rightBag = new ArrayList<>();
+        middleBag = new ArrayList<>();
     }
 
     //creates new instances of bags
-    public BagContainer(List<Integer> leftBag, List<Integer> rightBag){
+    public BagContainer(List<Integer> leftBag, List<Integer> middleBag, List<Integer> rightBag){
         this.leftBag = new ArrayList<>(leftBag);
         this.rightBag = new ArrayList<>(rightBag);
+        this.middleBag = new ArrayList<>(middleBag);
     }
 
     public void putLeft(int value){
         leftBag.add(value);
+    }
+
+    public void putMiddle(int value){
+        middleBag.add(value);
     }
 
     public void putRight(int value){
@@ -41,10 +49,15 @@ public class BagContainer {
     }
 
     /**
-     * @return the difference between two bags, result is gt 0
+     * @return the difference between three bags, result is gt 0
      */
     public int getDifference(){
-        return Math.abs(sumArray(leftBag) - sumArray(rightBag));
+        int leftBagWeight = sumArray(leftBag);
+        int rightBagWeight = sumArray(rightBag);
+        int middleBagWeight = sumArray(middleBag);
+        int minimal = Integer.min(Integer.min(leftBagWeight, rightBagWeight), middleBagWeight);
+        int maximal = Integer.max(Integer.max(leftBagWeight, rightBagWeight), middleBagWeight);
+        return Math.abs(maximal-minimal);
     }
 
     // sum the weight of a bag
@@ -59,7 +72,12 @@ public class BagContainer {
     @Override
     public String toString() {
         return "Left Bag:"+leftBag.toString()+"\n"+
+                "Middle Bag:" + middleBag.toString()+"\n"+
                 "Right Bag:" + rightBag.toString()+ "\n"+
                 "Difference is: "+ getDifference();
+    }
+
+    public List<Integer> getMiddleBag() {
+        return middleBag;
     }
 }
