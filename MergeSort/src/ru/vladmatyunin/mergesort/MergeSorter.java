@@ -1,4 +1,4 @@
-package ru.vladmatyunin;
+package ru.vladmatyunin.mergesort;
 
 /**
  * Created by Vlad on 26.09.2017.
@@ -6,6 +6,7 @@ package ru.vladmatyunin;
 public class MergeSorter {
     private int[] array;
     private int[] buffer;
+
     public int[] sort(int[] array){
         this.array = array;
         buffer = new int[array.length];
@@ -18,10 +19,11 @@ public class MergeSorter {
             int middle = start+(end-start) / 2;
             sortMerge(start, middle);
             sortMerge(middle+1, end);
-            merge(start, middle, end);
+            merge(array, start, middle, end, false);
         }
     }
-    private void merge(int start, int middle, int end){
+    void merge(int[] array, int start, int middle, int end, boolean helper){
+        if (helper) buffer = new int[array.length];
         for (int i = start; i <= end; i++) {
             buffer[i] = array[i];
         }
