@@ -12,14 +12,23 @@ public class Main {
         System.out.println("Write array size:");
         Scanner scanner = new Scanner(System.in);
         int size = scanner.nextInt();
-        System.out.println("Write array:");
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++){
-            array[i] = scanner.nextInt();
+        System.out.println("Generate?(y/n)");
+        String generate = scanner.next();
+        if (generate.toLowerCase().equals("y")){
+            int[] generatedArray = MyArraysUtils.generate(size);
+            int[] sortedArray = new ParallelSortExecutor().parallelSort(generatedArray);
+            System.out.println(Arrays.toString(sortedArray));
         }
-        //MergeSorter mergeSorter = new MergeSorter();
-        //int[] sortedArray = mergeSorter.sort(array);
-        int[] sortedArray = new ParallelSortExecutor().parallelSort(array);
-        System.out.println(Arrays.toString(sortedArray));
+        else {
+            System.out.println("Write array:");
+            int[] array = new int[size];
+            for (int i = 0; i < size; i++) {
+                array[i] = scanner.nextInt();
+            }
+            //MergeSorter mergeSorter = new MergeSorter();
+            //int[] sortedArray = mergeSorter.sort(array);
+            int[] sortedArray = new ParallelSortExecutor().parallelSort(array);
+            System.out.println(Arrays.toString(sortedArray));
+        }
     }
 }

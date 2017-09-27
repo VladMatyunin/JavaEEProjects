@@ -3,6 +3,7 @@ package ru.vladmatyunin;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Helper class
@@ -38,9 +39,18 @@ public class MyArraysUtils {
      * @param to - the same as 'from', the end position to copy
      * @return - copied array
      */
-    public static int[] splitArray(int[] array, Integer from, Integer to){
+    public static int[] splitArray(int[] array, Integer from, Integer to) {
         int[] result = Arrays.copyOfRange(array, from, to);
         from = to;
         return result;
+    }
+
+    /**
+     * @param size - array size
+     * @return random array with size 'size' of ints from 10 to 10+'size'
+     */
+    public static int[] generate(int size) {
+        Random random = new Random();
+        return random.ints(size,10,10+size).toArray();
     }
 }
