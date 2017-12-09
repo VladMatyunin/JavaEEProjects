@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            repository = new PartRepository();
+            repository = new PartRepository(getServletContext());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

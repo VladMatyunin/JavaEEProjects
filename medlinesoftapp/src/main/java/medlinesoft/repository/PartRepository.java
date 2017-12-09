@@ -4,9 +4,13 @@ package medlinesoft.repository;
 import medlinesoft.entity.Part;
 import medlinesoft.viewmodels.PartViewModel;
 
+import javax.servlet.ServletContext;
+import java.io.IOException;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
+
+import static medlinesoft.utils.Constants.*;
 
 /**
  * DAO class to access database entities of type Part
@@ -15,15 +19,28 @@ import java.util.*;
  */
 public class PartRepository {
 
-    public PartRepository() throws SQLException, ClassNotFoundException {
-        Class.forName("org.postgresql.Driver");
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/medline", "postgres", "sa");
+    public PartRepository(ServletContext servletContext) throws SQLException, ClassNotFoundException {
+        Class.forName(DRIVER_CLASS);
+        Properties properties = new Properties();
+        try {
+            properties.load(servletContext.getResourceAsStream(PATH_TO_DB_PROPERTIES));
+            connection = DriverManager.getConnection(
+                    properties.getProperty("db.url"),
+                    properties.getProperty("db.user"),
+                    properties.getProperty("db.password"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(PROPERTIES_LOAD_ERROR_MESSAGE);
+            connection = DriverManager.getConnection(DEFAULT_DB_URL, DEFAULT_DB_USER, DEFAULT_DB_PASSWORD);
+        }
+
     }
 
     private Connection connection;
 
     /**
      * get all Part objects using filter from view model
+     *
      * @param viewModel - filters applied by user
      * @return - all satisfied objects
      * @throws SQLException
