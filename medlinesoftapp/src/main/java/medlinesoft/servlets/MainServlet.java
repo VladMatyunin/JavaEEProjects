@@ -1,7 +1,5 @@
 package medlinesoft.servlets;
 
-import com.sun.deploy.net.HttpRequest;
-import medlinesoft.entity.Part;
 import medlinesoft.repository.PartRepository;
 import medlinesoft.viewmodels.PartViewModel;
 
