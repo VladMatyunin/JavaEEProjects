@@ -1,9 +1,13 @@
 package medlinesoft.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
+import static medlinesoft.utils.Constants.getDateFormatter;
 
 /**
- * Created by Vlad on 08/12/17.
+ * Pojo object stored in database in queried from UI
  */
 public class Part {
 
@@ -75,6 +79,15 @@ public class Part {
 
     public void setReceived(Date received) {
         this.received = received;
+    }
+
+    // for jsp
+    public String getReceivedString(){
+        return getDateFormatter().format(received);
+    }
+    // for jsp
+    public String getShippedString(){
+        return getDateFormatter().format(shipped);
     }
 }
 

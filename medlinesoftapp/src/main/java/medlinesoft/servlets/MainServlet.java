@@ -16,10 +16,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static medlinesoft.utils.Constants.*;
+
 /**
- * Created by Vlad on 08/12/17.
+ * Handles filtered queries and shows Part objects from database
+ * See part.jsp
  */
-@WebServlet(value = "/main")
+@WebServlet(value = MAIN_SERVLET_URL)
 public class MainServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
@@ -38,10 +41,9 @@ public class MainServlet extends HttpServlet {
         try {
             req.setAttribute("partList", repository.getAll(new PartViewModel()));
             req.setAttribute("filter", new PartViewModel());
-            req.setAttribute("header_text", "Hello, Vlad");
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/part.jsp").forward(req, resp);
+            req.getServletContext().getRequestDispatcher(PATH_TO_PART_JSP).forward(req, resp);
         } catch (SQLException e) {
-            req.setAttribute("error", "SQL error occurred while accessing database:"+e.getMessage());
+            req.setAttribute("error", SQL_ERROR_MESSAGE+e.getMessage());
         }
     }
 
@@ -52,11 +54,11 @@ public class MainServlet extends HttpServlet {
             req.setAttribute("partList", repository.getAll(filter));
             req.setAttribute("filter", filter);
         } catch (SQLException e) {
-            req.setAttribute("error", "SQL error occurred while accessing database:"+e.getMessage());
+            req.setAttribute("error", SQL_ERROR_MESSAGE+e.getMessage());
         } catch (ParseException e) {
-            req.setAttribute("error", "error while parsing date, use pattern MMM dd, yyyy: "+e.getMessage());
+            req.setAttribute("error", PARSER_ERROR_MESSAGE+e.getMessage());
         }
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/part.jsp").forward(req, resp);
+        req.getServletContext().getRequestDispatcher(PATH_TO_PART_JSP).forward(req, resp);
     }
 
     // method for helper, can be replaced to another file
@@ -69,7 +71,7 @@ public class MainServlet extends HttpServlet {
         if (!Objects.equals(qty, ""))viewModel.setQty(Integer.valueOf(qty));
         else viewModel.setQty(Integer.MAX_VALUE);
         // parse dates
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy",Locale.ENGLISH);
+        SimpleDateFormat simpleDateFormat = getDateFormatter();
         viewModel.setReceivedAfter(parseDate(request.getParameter("receivedAfter"), simpleDateFormat));
         viewModel.setReceivedBefore(parseDate(request.getParameter("receivedBefore"), simpleDateFormat));
         viewModel.setShippedAfter(parseDate(request.getParameter("shippedAfter"),simpleDateFormat));

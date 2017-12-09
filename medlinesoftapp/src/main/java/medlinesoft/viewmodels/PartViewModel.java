@@ -6,14 +6,23 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 
+import static medlinesoft.utils.Constants.getDateFormatter;
+
 /**
- * Created by Vlad on 08/12/17.
+ * View model object. Used to work with filters.
+ * Main idea is to convert data from passed form and to send back to jsp.
  */
 public class PartViewModel {
 
+    /**
+     * The limit in date, if used didn't set it.
+     * This feature makes query simple and helps Postgres easily
+     * build plans based on preparedStatement object
+     */
     private final Date FAR_FUTURE = new Date(999_999_999_999_999L);
     private final Date EARLY_PAST = new Date(0L);
-    private final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+    private final SimpleDateFormat DATE_FORMATTER = getDateFormatter();
+
     public PartViewModel(){
         qty = 0;
         shippedAfter = EARLY_PAST;

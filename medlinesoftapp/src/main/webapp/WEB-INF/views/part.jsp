@@ -84,13 +84,15 @@
                 <th>${part.name}</th>
                 <th>${part.vendor}</th>
                 <th>${part.qty}</th>
-                <th>${part.shipped}</th>
-                <th>${part.received}</th>
+                <th>${part.getShippedString()}</th>
+                <th>${part.getReceivedString()}</th>
             </tr>
         </c:forEach>
     </table>
 </div>
 <script>
+    // on click of one of table heads the value in hidden inputs will be changed
+    // and passed to server with the form
     var asc = document.getElementById("asc");
     var orderByParameter = document.getElementById("orderByParameter");
     var form = document.getElementById("part-form");
